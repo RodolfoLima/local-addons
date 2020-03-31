@@ -55,8 +55,8 @@ class LibraryLoanWizard(models.TransientModel):
     @api.multi
     def record_loans(self):
         for wizard in self:
-            member = wizard.member_id
-            books = wizard.book_ids
+            # member = wizard.member_id
+            # books = wizard.book_ids
             loan = self.env['library.book.loan']
             for book in wizard.book_ids:
                 values = self._prepare_loan(book)
@@ -215,8 +215,8 @@ class LibraryBook(models.Model):
     @api.constrains('date_release')
     def _check_release_date(self):
         for r in self:
-            logger(r.date_release)
-            logger(fields.Date.today())
+            # print(r.date_release)
+            # print(fields.Date.today())
             if r.date_release > fields.Date.today():
                 raise models.ValidationError(
                     'Release date must be in the past')
@@ -275,7 +275,7 @@ class LibraryBook(models.Model):
     @api.model
     @api.returns('self', lambda rec: rec.id)
     def create(self, values):
-        logger(self.user_has_groups('my_module.group_library_user'))
+        # print(self.user_has_groups('my_module.group_library_user'))
         if not self.user_has_groups('my_module.group_library_manager'):
             if 'manager_remarks' in values:
                 raise exceptions.UserError(
@@ -293,7 +293,6 @@ class LibraryBook(models.Model):
                     'manager_remarks'
                 )
         return super(LibraryBook, self).write(values)
-
 
     # @api.model
     # def fields_get(self,
@@ -348,13 +347,13 @@ class LibraryMember(models.Model):
     def borrow_books(self, book_ids):
         if len(self) != 1:
             raise exceptions.UserError(
-                _('It is forbidden to loan the same books '
-                  'to multiple members.')
+                ('It is forbidden to loan the same books '
+                    'to multiple members.')
             )
         loan_model = self.env['library.book.loan']
         for book in self.env['library.book'].browse(book_ids):
             val = self._prepare_loan(book)
-            loan = loan_model.create(val)
+            # loan = loan_model.create(val)
 
     @api.multi
     def _prepare_loan(self, book):
@@ -393,12 +392,8 @@ class LibraryMember(models.Model):
         # values.update(value)
         # record = wizard.create(values)
 
-
-
 # class LibraryMember(models.Model):
 #    _inherit = 'library.member'
 #    loan_duration = fields.Integer('Loan duration',
 #                                   default=10,
 #                                   required=True)'''
-
-
