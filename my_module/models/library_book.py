@@ -295,21 +295,20 @@ class LibraryBook(models.Model):
         return super(LibraryBook, self).write(values)
 
 
-    '''@api.model
-    def fields_get(self,
-                   allfields=None,
-                   #write_access=True,
-                   attributes=None):
-        fields = super(LibraryBook, self).fields_get(
-            allfields=allfields,
-            #write_access=write_access,
-            attributes=attributes
-        )
-        print(fields)
-        if not self.user_has_groups('my_module.group_library_manager'):
-            if 'manager_remarks' in fields:
-                fields['manager_remarks']['readonly'] = True'''
-
+    # @api.model
+    # def fields_get(self,
+    #               allfields=None,
+    #               #write_access=True,
+    #               attributes=None):
+    #    fields = super(LibraryBook, self).fields_get(
+    #        allfields=allfields,
+    #        #write_access=write_access,
+    #        attributes=attributes
+    #    )
+    #    print(fields)
+    #    if not self.user_has_groups('my_module.group_library_manager'):
+    #        if 'manager_remarks' in fields:
+    #            fields['manager_remarks']['readonly'] = True'''
 
 
 class ResPartner(models.Model):
@@ -387,19 +386,19 @@ class LibraryMember(models.Model):
         values.update(updates.get('value', {}))
         record = wizard.create(values)
 
-        '''value = updates.get('value', {})
-        for name, val in value.iteritems():
-            if isinstance(val, tuple):
-                value[name]=val[0]
-        values.update(value)
-        record = wizard.create(values)'''
+        # value = updates.get('value', {})
+        # for name, val in value.iteritems():
+        #   if isinstance(val, tuple):
+        #        value[name]=val[0]
+        # values.update(value)
+        # record = wizard.create(values)
 
 
-'''
-class LibraryMember(models.Model):
-    _inherit = 'library.member'
-    loan_duration = fields.Integer('Loan duration',
-                                   default=10,
-                                   required=True)'''
+
+# class LibraryMember(models.Model):
+#    _inherit = 'library.member'
+#    loan_duration = fields.Integer('Loan duration',
+#                                   default=10,
+#                                   required=True)'''
 
 
