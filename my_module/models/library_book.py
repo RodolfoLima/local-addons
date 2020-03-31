@@ -215,8 +215,8 @@ class LibraryBook(models.Model):
     @api.constrains('date_release')
     def _check_release_date(self):
         for r in self:
-            print(r.date_release)
-            print(fields.Date.today())
+            logger(r.date_release)
+            logger(fields.Date.today())
             if r.date_release > fields.Date.today():
                 raise models.ValidationError(
                     'Release date must be in the past')
@@ -275,7 +275,7 @@ class LibraryBook(models.Model):
     @api.model
     @api.returns('self', lambda rec: rec.id)
     def create(self, values):
-        print(self.user_has_groups('my_module.group_library_user'))
+        logger(self.user_has_groups('my_module.group_library_user'))
         if not self.user_has_groups('my_module.group_library_manager'):
             if 'manager_remarks' in values:
                 raise exceptions.UserError(
@@ -294,8 +294,8 @@ class LibraryBook(models.Model):
                 )
         return super(LibraryBook, self).write(values)
 
-    """
-    @api.model
+
+    '''@api.model
     def fields_get(self,
                    allfields=None,
                    #write_access=True,
@@ -308,8 +308,8 @@ class LibraryBook(models.Model):
         print(fields)
         if not self.user_has_groups('my_module.group_library_manager'):
             if 'manager_remarks' in fields:
-                fields['manager_remarks']['readonly'] = True
-    """
+                fields['manager_remarks']['readonly'] = True'''
+
 
 
 class ResPartner(models.Model):
@@ -387,20 +387,19 @@ class LibraryMember(models.Model):
         values.update(updates.get('value', {}))
         record = wizard.create(values)
 
-        """
-        value = updates.get('value', {})
+        '''value = updates.get('value', {})
         for name, val in value.iteritems():
             if isinstance(val, tuple):
                 value[name]=val[0]
         values.update(value)
-        record = wizard.create(values)
-        """
+        record = wizard.create(values)'''
 
-"""
+
+'''
 class LibraryMember(models.Model):
     _inherit = 'library.member'
     loan_duration = fields.Integer('Loan duration',
                                    default=10,
-                                   required=True)
-"""
+                                   required=True)'''
+
 
