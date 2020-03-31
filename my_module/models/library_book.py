@@ -354,6 +354,7 @@ class LibraryMember(models.Model):
         for book in self.env['library.book'].browse(book_ids):
             val = self._prepare_loan(book)
             # loan = loan_model.create(val)
+            loan_model.create(val)
 
     @api.multi
     def _prepare_loan(self, book):
@@ -383,7 +384,8 @@ class LibraryMember(models.Model):
         specs = wizard._onchange_spec()
         updates = wizard.onchanges(values, ['member_id'], specs)
         values.update(updates.get('value', {}))
-        record = wizard.create(values)
+        # record = wizard.create(values)
+        wizard.create(values)
 
         # value = updates.get('value', {})
         # for name, val in value.iteritems():
